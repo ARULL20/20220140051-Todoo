@@ -48,7 +48,6 @@ class User extends Authenticatable
 
     public function todos()
     {
-
-        return $thiss->hasMany(Todo::class);
+        return $this->hasMany(Todo::class);
     }
 }
