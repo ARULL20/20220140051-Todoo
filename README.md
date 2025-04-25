@@ -1,3 +1,12 @@
+model todo ![model todo](https://github.com/user-attachments/assets/8970162b-bca0-486a-be3c-0a7229b57c71)
+model user ![mode user](https://github.com/user-attachments/assets/146ee318-b16b-4d07-9ebf-9e41526776f3)
+controller todo![controller todo](https://github.com/user-attachments/assets/53fa64ed-8a87-484f-9b4e-3acba00e5e78)
+controller user ![user controller](https://github.com/user-attachments/assets/46999df3-5c05-4747-9234-51724adfb923)
+list  ![list ](https://github.com/user-attachments/assets/b992b490-c574-424e-9e78-c99aee1ba085)
+dashboard page ![dashboard](https://github.com/user-attachments/assets/7363a8c7-f96c-4361-b5ae-a4281374a26b)
+todo page ![todo page](https://github.com/user-attachments/assets/2ee23fc1-1e2b-42ec-8415-ca01a454fd2a)
+user page ![user page](https://github.com/user-attachments/assets/74b8e002-f895-4ad4-95e5-94bf86b1ac14)
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
