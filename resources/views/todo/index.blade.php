@@ -38,8 +38,8 @@
                                             {{ $todo->title }}
                                         </a>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        {{ $todo->category->title ?? '-' }}
+                                    <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                                        {{ $todo->category?->title ?? 'No Category' }}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if (!$todo->is_done)

@@ -1,63 +1,75 @@
 <x-app-layout>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @vite('resources/css/app.css')
+    </head>
+
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Todo Category') }}
         </h2>
     </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            {{-- Tombol Create tetap kiri --}}
-            <div class="flex justify-start mb-4">
-                <a href="{{ route('category.create') }}">
-                    <x-primary-button>
-                        {{ __('Create Category') }}
-                    </x-primary-button>
-                </a>
+    <div class="py-12 flex justify-center items-center">
+        <div class="w-full max-w-7xl bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
+            <div class="p-6 text-xl text-gray-900 dark:text-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                    <a href="{{ route('category.create')}}" 
+                    class="px-3 py-2 text-sm bg-white text-gray-900 border border-gray-300 rounded-md shadow-sm hover:bg-gray-100">
+                    {{ __('CREATE') }}
+                    </a>
+                    </div>
+                </div>
+                @if (session('success'))
+                    <p x-data="{ show: true }" x-show="show" x-transition
+                        x-init="setTimeout(() => show = false, 5000)"
+                        class="text-sm text-green-600 dark:text-green-400">{{ session('success') }}
+                    </p>
+                @endif
+                @if (session('danger'))
+                    <p x-data="{ show : true }" x-show="show" x-transition
+                        x-init="setTimeout(() => show = false, 5000)"
+                        class="text-sm text-red-600 dark:text-red-400">{{ session('danger') }}
+                    </p>
+                @endif
             </div>
 
-            {{-- Tabel --}}
-            <div class="bg-white dark:bg-gray-800 shadow-md sm:rounded-lg overflow-hidden">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 w-1/2 text-center">Title</th>
-                            <th scope="col" class="px-6 py-3 w-1/2 text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($categories as $category)
-                            <tr class="border-b dark:border-gray-700 border-gray-200 h-16">
-                                <td class="px-6 py-4 font-medium text-gray-800 dark:text-gray-200 text-center">
-                                    {{ $category->title }}
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex items-center justify-center space-x-4">
-                                        <a href="{{ route('category.edit', $category) }}" class="text-blue-600 hover:underline">
-                                            Edit
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left">Title</th>
+                                <th scope="col" class="px-6 py-3">Todo</th>
+                                <th scope="col" class="px-6 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($categories as $category)
+                                <tr class="border-b border-gray-600 dark:border-gray-500">
+                                    <td class="px-6 py-4 font-medium text-white dark:text-white">
+                                        <a href="{{ route('category.edit', $category) }}" class="hover:underline text-xs">
+                                            {{ $category->title }}
                                         </a>
-                                        <form action="{{ route('category.destroy', $category) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="inline">
+                                    </td>
+                                    <td class="px-6 py-4">{{ $category->todos->count() }}</td>
+                                    <td class="px-6 py-4">
+                                        <form action="{{ route('category.destroy', $category) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 dark:text-red-400 hover:underline">
+                                            <button type="submit" class="text-red-600 dark:text-red-400">
                                                 Delete
                                             </button>
                                         </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="2" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
-                                    No categories found.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
         </div>
     </div>
 </x-app-layout>

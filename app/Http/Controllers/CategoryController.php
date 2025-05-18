@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
-    {
-        $categories = Category::with('todos')->get();
-        return view('category.index', compact('categories'));
-    }
+  public function index()
+{
+    $categories = Category::with('todos')
+        ->where('user_id', Auth::id())
+        ->get();
+
+    return view('category.index', compact('categories'));
+}
 
     public function create()
     {

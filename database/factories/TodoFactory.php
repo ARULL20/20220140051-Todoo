@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\Todo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,10 +17,10 @@ class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => rand(1, 100), // Asumsikan ID user acak
+            'user_id' => rand(1, 100),
             'title' => ucwords(fake()->sentence()),
-            'is_done' => rand(0, 1), 
-            'category_id' => rand(1, 10),
+            'is_done' => rand(0, 1),
+            'category_id' => rand(1, 5),
         ];
     }
 }

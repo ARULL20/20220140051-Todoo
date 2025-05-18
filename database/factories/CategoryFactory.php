@@ -1,53 +1,25 @@
 <?php
 
-namespace App\Models;
+namespace Database\Factories;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
-class User extends Authenticatable
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ */
+class CategoryFactory extends Factory
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
     /**
-     * The attributes that are mass assignable.
+     * Define the model's default state.
      *
-     * @var list<string>
+     * @return array<string, mixed>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function definition(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'user_id' => User::factory(),
+            'title' => ucwords($this->faker->words(2, true)),
         ];
-    }
-
-    public function todos()
-    {
-        return $this->hasMany(Todo::class);
     }
 }
